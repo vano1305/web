@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://cxf.apache.org/jaxrs
+                        http://cxf.apache.org/schemas/jaxrs.xsd">
+ 
+ <import resource="classpath:META-INF/cxf/cxf.xml" />
+  
+ <bean id="RatesService" class="com.dn.ivan.rates.services.RatesService" />
+  
+ <jaxrs:server id="RestfullCXFService" address="/">
+	<jaxrs:serviceBeans>
+		<ref bean="RatesService" />
+	</jaxrs:serviceBeans>
+	
+	<jaxrs:outInterceptors>
+      <bean class="com.dn.ivan.rates.logic.interceptors.FormattedJAXBInterceptor" />
+    </jaxrs:outInterceptors>
+    <jaxrs:inInterceptors>
+      <bean class="com.dn.ivan.rates.logic.interceptors.ContentTypeInterceptor" />
+    </jaxrs:inInterceptors>
+    	
+	<jaxrs:providers>
+   		<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+	</jaxrs:providers>
+	
+</jaxrs:server>
+ 
+</beans>

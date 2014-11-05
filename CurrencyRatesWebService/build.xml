@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project default="war" name="CurrencyRatesWebService">
+	
+	<property name="dist.dir" location="C:\CXFExample"/>
+	<property name="build.dir" location="C:\CXFExample\build"/>
+	<property name="project.name" value="currency_rates.cxf"/>
+	<property name="cxf.dir" value="C:/WorkspaceEE/CXFLibs" />
+	
+	<path id="libs.cxf">				
+		<fileset dir="${cxf.dir}">
+		    <include name="*.jar" />
+		</fileset>		
+	</path>
+	
+	<taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="libs.cxf"/>
+
+	<path id="libs.main.module">
+		<path refid="libs.cxf"/>
+	</path>
+		
+	<target name="clean">
+	    <echo>Cleaning the ${build.dir}</echo>
+	    <delete dir="${build.dir}"/>
+	</target>
+	
+	<target name="init" depends="clean">
+	    <echo>Creating the build directory</echo>
+	    <mkdir dir="${build.dir}/WEB-INF/classes"/>
+	</target>
+	
+	<target name="copy" depends="init">
+		
+		<copy todir="${build.dir}/WEB-INF">
+			<fileset dir="build"/>
+		</copy>
+		
+		<copy todir="${build.dir}/WEB-INF">
+			<fileset dir="WebContent/WEB-INF">
+				<include name="beans.xml"/>
+			</fileset>
+		</copy>
+	    
+	</target>
+	
+	<target name="war" depends="copy" >
+	    <echo>Building the war file</echo>
+	    <war destfile="${dist.dir}/${project.name}.war" webxml="WebContent/WEB-INF/web.xml">
+	    	<fileset dir = "${build.dir}" />	    	
+	    </war>
+	</target>
+	
+</project>
