@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import com.dn.ivan.rates.logic.ManageLogic;
+import com.dn.ivan.rates.logic.SaveBlackMarketRates2DBJob;
 import com.dn.ivan.rates.logic.SaveFuelRates2DBJob;
 
 public class LoadRatesContextListener implements ServletContextListener {
@@ -15,6 +16,8 @@ public class LoadRatesContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
+		
 		ManageLogic.createJob(SaveFuelRates2DBJob.class, "fuelJob", 4);
+		ManageLogic.createJob(SaveBlackMarketRates2DBJob.class, "blackMarketJob", 4);
 	}
 }

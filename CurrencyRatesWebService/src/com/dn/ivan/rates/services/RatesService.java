@@ -7,6 +7,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.dn.ivan.rates.BlackMarketRatesLst;
 import com.dn.ivan.rates.CommercialRatesLst;
 import com.dn.ivan.rates.FuelRatesLst;
 import com.dn.ivan.rates.NbuRatesLst;
@@ -53,5 +54,18 @@ public class RatesService {
 			e.printStackTrace();
 			return Response.ok(new FuelRatesLst()).build();
 		}		
+	}
+	
+	@GET
+	@Path("/black_market")
+	public Response lstBlackMarketRates(@QueryParam("city") String cityCode) {
+		
+		try {			
+			return Response.ok(ManageLogic.getBlackMarketRates(cityCode)).build();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return Response.ok(new BlackMarketRatesLst()).build();
+		}
 	}
 }
