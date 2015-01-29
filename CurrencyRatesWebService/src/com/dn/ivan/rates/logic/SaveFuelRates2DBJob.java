@@ -17,7 +17,7 @@ public class SaveFuelRates2DBJob implements Job {
 		for(int i = 0; i < regionList.size(); i++) {
 			
 			try {
-				ManageLogic.getFuelRatesFromWEB(regionList.get(i), true);
+				FuelManageLogic.getFuelRatesFromWEB(regionList.get(i), true);
 			}
 			catch(Exception e) {
 				e.printStackTrace();

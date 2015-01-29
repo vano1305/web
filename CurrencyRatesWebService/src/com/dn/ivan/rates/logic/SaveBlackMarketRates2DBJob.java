@@ -22,7 +22,7 @@ public class SaveBlackMarketRates2DBJob implements Job {
 				for(int b = 0; b < opCode.size(); b++) {
 					
 					try {
-						ManageLogic.getBlackMarketRatesFromWEB(cityCode.get(i), currencyCode.get(a), opCode.get(b), true);
+						BlackMarketManageLogic.getBlackMarketRatesFromWEB(cityCode.get(i), currencyCode.get(a), opCode.get(b), true);
 					}
 					catch(Exception e) {
 						e.printStackTrace();

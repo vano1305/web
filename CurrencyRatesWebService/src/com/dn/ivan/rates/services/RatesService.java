@@ -11,7 +11,10 @@ import com.dn.ivan.rates.BlackMarketRatesLst;
 import com.dn.ivan.rates.CommercialRatesLst;
 import com.dn.ivan.rates.FuelRatesLst;
 import com.dn.ivan.rates.NbuRatesLst;
-import com.dn.ivan.rates.logic.ManageLogic;
+import com.dn.ivan.rates.logic.BlackMarketManageLogic;
+import com.dn.ivan.rates.logic.CommercialManageLogic;
+import com.dn.ivan.rates.logic.FuelManageLogic;
+import com.dn.ivan.rates.logic.NbuManageLogic;
 
 @Path("/manage_rates")
 @Produces({MediaType.APPLICATION_XML, MediaType.TEXT_XML, MediaType.APPLICATION_JSON})
@@ -22,7 +25,7 @@ public class RatesService {
 	public Response lstNbuRates() {
 		
 		try {			
-			return Response.ok(ManageLogic.getNbuRates()).build();
+			return Response.ok(NbuManageLogic.getNbuRates()).build();
 		}
 		catch (Exception e) {
 			e.printStackTrace();	
@@ -35,7 +38,7 @@ public class RatesService {
 	public Response lstCommercialRates() {
 		
 		try {
-			return Response.ok(ManageLogic.getCommercialRates()).build();
+			return Response.ok(CommercialManageLogic.getCommercialRates()).build();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -48,7 +51,7 @@ public class RatesService {
 	public Response lstFuelRates(@QueryParam("region") String regionCode) {
 		
 		try {			
-			return Response.ok(ManageLogic.getFuelRatesFromDB(regionCode)).build();
+			return Response.ok(FuelManageLogic.getFuelRatesFromDB(regionCode)).build();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -61,7 +64,7 @@ public class RatesService {
 	public Response lstBlackMarketRates(@QueryParam("city") String cityCode) {
 		
 		try {			
-			return Response.ok(ManageLogic.getBlackMarketRates(cityCode)).build();
+			return Response.ok(BlackMarketManageLogic.getBlackMarketRates(cityCode)).build();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
