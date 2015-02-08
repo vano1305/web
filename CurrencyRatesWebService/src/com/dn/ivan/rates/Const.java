@@ -8,10 +8,7 @@ public class Const {
 	
 	public static final String NBU_SERVICE = "http://finance.i.ua/nbu/";
 	
-	public static final String COMMERCIAL_USD_SERVICE = "http://finance.i.ua/usd/";
-	public static final String COMMERCIAL_EUR_SERVICE = "http://finance.i.ua/eur/";
-	public static final String COMMERCIAL_RUB_SERVICE = "http://finance.i.ua/rub/";
-	
+	public static final String COMMERCIAL_SERVICE = "http://finance.i.ua/#ccy#/";	
 	public static final String FUEL_SERVICE = "http://finance.i.ua/fuel/";
 	public static final String BLACK_MARKET_SERVICE = "http://finance.i.ua/market/";
 	
@@ -32,4 +29,10 @@ public class Const {
 			+ " FROM black_market_rates bmr"
 			+ " WHERE bmr.cityCode = ? and bmr.currencyCode = ? and bmr.opCode = ? and bmr.date = (select max(bmr_.date) from black_market_rates bmr_ where bmr_.cityCode = bmr.cityCode and bmr_.currencyCode = bmr.currencyCode and bmr_.opCode = bmr.opCode)";
 	public static final String CLEAN_BLACK_MARKET_RATES_TABLE = "delete from black_market_rates where date < DATE_SUB(now(),INTERVAL 3 DAY)";
+	
+	public static final String GET_COMMERCIAL_RATES_FROM_DB = "SELECT DATE_FORMAT(cr.date, '%d-%m-%Y'), cr.bankCode, cr.currencyCode, cr.rateBuy, cr.rateBuy_delta, cr.rateSale, cr.rateSale_delta"
+			+ " FROM commercial_rates cr"
+			+ " WHERE cr.currencyCode = ? and cr.date = (select max(cr_.date) from commercial_rates cr_ where cr_.bankCode = cr.bankCode and cr_.currencyCode = cr.currencyCode)";
+	public static final String SAVE_COMMERCIAL_RATES_2_DB = "insert into commercial_rates (date, bankCode, currencyCode, rateBuy, rateSale, rateBuy_delta, rateSale_delta) values (now(),?,?,?,?,?,?)";
+	public static final String CLEAN_COMMERCIAL_RATES_TABLE = "delete from commercial_rates where date < DATE_SUB(now(),INTERVAL 3 DAY)";
 }

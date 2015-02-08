@@ -127,6 +127,11 @@ public class ManageLogic {
 			
 			pstmt = conn.prepareStatement(Const.CLEAN_BLACK_MARKET_RATES_TABLE);
 			pstmt.executeUpdate();
+			pstmt.close();
+			pstmt = null;
+			
+			pstmt = conn.prepareStatement(Const.CLEAN_COMMERCIAL_RATES_TABLE);
+			pstmt.executeUpdate();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
