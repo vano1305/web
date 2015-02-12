@@ -88,14 +88,14 @@ public class CommercialManageLogic {
 				
 				CommercialRateItem item = new CommercialRateItem();
 				
-				item.date = rs.getString(1);
+				item.date = rs.getString(1);				
 				item.sourceUrl = rs.getString(2);
 				item.codeAlpha = rs.getString(3);
 				
-				item.rateBuy = rs.getDouble(4) == 0? "": String.valueOf(rs.getDouble(4));
-				item.rateBuyDelta = rs.getDouble(5) == 0? "": String.valueOf(rs.getDouble(5));
-				item.rateSale = rs.getDouble(6) == 0? "": String.valueOf(rs.getDouble(6));
-				item.rateSaleDelta = rs.getDouble(7) == 0? "": String.valueOf(rs.getDouble(7));
+				item.rateBuy = rs.getDouble(4) == 0? "0": String.valueOf(rs.getDouble(4));
+				item.rateBuyDelta = rs.getDouble(5) == 0? "0": String.valueOf(rs.getDouble(5));
+				item.rateSale = rs.getDouble(6) == 0? "0": String.valueOf(rs.getDouble(6));
+				item.rateSaleDelta = rs.getDouble(7) == 0? "0": String.valueOf(rs.getDouble(7));
 				
 				response.commercialRatesList.add(item);
 			}			
@@ -187,7 +187,7 @@ public class CommercialManageLogic {
 				
 				pstmt.execute();
 				pstmt.close();
-				pstmt = null;				
+				pstmt = null;
 			}
 		}
 		catch(Exception e) {

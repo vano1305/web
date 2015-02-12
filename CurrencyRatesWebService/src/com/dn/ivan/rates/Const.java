@@ -32,7 +32,8 @@ public class Const {
 	
 	public static final String GET_COMMERCIAL_RATES_FROM_DB = "SELECT DATE_FORMAT(cr.date, '%d-%m-%Y'), cr.bankCode, cr.currencyCode, cr.rateBuy, cr.rateBuy_delta, cr.rateSale, cr.rateSale_delta"
 			+ " FROM commercial_rates cr"
-			+ " WHERE cr.currencyCode = ? and cr.date = (select max(cr_.date) from commercial_rates cr_ where cr_.bankCode = cr.bankCode and cr_.currencyCode = cr.currencyCode)";
+			+ " WHERE cr.currencyCode = ? and cr.date = (select max(cr_.date) from commercial_rates cr_ where cr_.bankCode = cr.bankCode and cr_.currencyCode = cr.currencyCode)"
+			+ " ORDER BY cr.bankCode";
 	public static final String SAVE_COMMERCIAL_RATES_2_DB = "insert into commercial_rates (date, bankCode, currencyCode, rateBuy, rateSale, rateBuy_delta, rateSale_delta) values (now(),?,?,?,?,?,?)";
 	public static final String CLEAN_COMMERCIAL_RATES_TABLE = "delete from commercial_rates where date < DATE_SUB(now(),INTERVAL 3 DAY)";
 }

@@ -67,13 +67,18 @@ public class CommercialSAXParser {
 				rate = new CommercialRateItem();
 				rate.codeAlpha = currencyCode;
 			}
-			if ("td".equalsIgnoreCase(qName)) {				
+			if ("td".equalsIgnoreCase(qName)) {
 				td_count ++;
 			}
 			if ("a".equalsIgnoreCase(qName)) {
 				
 				if (td_count == 1 && attributes.getValue("href") != null && !"".equalsIgnoreCase(attributes.getValue("href"))) {
+					
 					rate.sourceUrl = attributes.getValue("href");
+					
+					rate.sourceUrl = rate.sourceUrl.replaceFirst("/", "");
+					rate.sourceUrl = rate.sourceUrl.replaceFirst("/", "_");
+					rate.sourceUrl = rate.sourceUrl.replaceFirst("/", "");
 				}
 			}
 			if ("i".equalsIgnoreCase(qName)) {
