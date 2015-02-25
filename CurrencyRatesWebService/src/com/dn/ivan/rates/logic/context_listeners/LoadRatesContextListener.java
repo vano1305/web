@@ -7,6 +7,7 @@ import com.dn.ivan.rates.logic.ManageLogic;
 import com.dn.ivan.rates.logic.SaveBlackMarketRates2DBJob;
 import com.dn.ivan.rates.logic.SaveCommercialRates2DBJob;
 import com.dn.ivan.rates.logic.SaveFuelRates2DBJob;
+import com.dn.ivan.rates.logic.SaveNbuHistory2DBJob;
 
 public class LoadRatesContextListener implements ServletContextListener {
 
@@ -18,8 +19,15 @@ public class LoadRatesContextListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		
-		ManageLogic.createJob(SaveFuelRates2DBJob.class, "fuelJob", 4);
-		ManageLogic.createJob(SaveBlackMarketRates2DBJob.class, "blackMarketJob", 4);
-		ManageLogic.createJob(SaveCommercialRates2DBJob.class, "commercialJob", 4);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob1", 8, 0, 24);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob2", 12, 0, 24);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob3", 16, 0, 24);
+		
+		ManageLogic.createDailyJob(SaveBlackMarketRates2DBJob.class, "BlackMarketJob", 6, 0, 4);
+		
+		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob1", 8, 45, 24);
+		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob2", 11, 0, 24);
+		
+		ManageLogic.createDailyJob(SaveNbuHistory2DBJob.class, "NbuHistory", 12, 30, 24);
 	}
 }

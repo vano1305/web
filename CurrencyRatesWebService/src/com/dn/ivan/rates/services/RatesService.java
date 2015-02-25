@@ -10,10 +10,12 @@ import javax.ws.rs.core.Response;
 import com.dn.ivan.rates.BlackMarketRatesLst;
 import com.dn.ivan.rates.CommercialRatesLst;
 import com.dn.ivan.rates.FuelRatesLst;
+import com.dn.ivan.rates.NbuHistoryItem;
 import com.dn.ivan.rates.NbuRatesLst;
 import com.dn.ivan.rates.logic.BlackMarketManageLogic;
 import com.dn.ivan.rates.logic.CommercialManageLogic;
 import com.dn.ivan.rates.logic.FuelManageLogic;
+import com.dn.ivan.rates.logic.NbuHistoryManageLogic;
 import com.dn.ivan.rates.logic.NbuManageLogic;
 
 @Path("/manage_rates")
@@ -69,6 +71,33 @@ public class RatesService {
 		catch (Exception e) {
 			e.printStackTrace();
 			return Response.ok(new BlackMarketRatesLst()).build();
+		}
+	}
+	
+	@GET
+	@Path("/nbu_history")
+	public Response getNbuHistory(@QueryParam("currency") String currencyCode, @QueryParam("date1") String date1, @QueryParam("date2") String date2) {
+		
+		try {			
+			return Response.ok(NbuHistoryManageLogic.getNbuHistory(currencyCode, date1, date2)).build();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return Response.ok(new NbuHistoryItem()).build();
+		}
+	}
+	
+	@GET
+	@Path("/load_nbu_history")
+	public Response loadNbuHistory(@QueryParam("days") String days) {
+		
+		try {			
+			NbuHistoryManageLogic.getNbuRatesForHistory(Integer.valueOf(days));
+			return Response.ok().build();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return Response.ok(new NbuHistoryItem()).build();
 		}
 	}
 }

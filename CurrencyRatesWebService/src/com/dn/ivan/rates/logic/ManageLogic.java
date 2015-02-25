@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.quartz.DateBuilder;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -56,10 +57,29 @@ public class ManageLogic {
 					.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInHours(intervalInHours).repeatForever())
 					.build();
 			
-			/*Trigger trigger = TriggerBuilder.newTrigger()
-					.startNow()
-					.withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(12, 0))
-					.build();*/
+			SchedulerFactory schFactory = new StdSchedulerFactory();
+			Scheduler sch = schFactory.getScheduler();
+			sch.start();
+			sch.scheduleJob(job, trigger);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public static void createDailyJob(Class<? extends Job> jobClass, String identity, int hour, int minute, int interval) {
+		
+		try {
+			
+			JobDetail job = JobBuilder.newJob(jobClass).withIdentity(identity).build();
+			
+			Trigger trigger = TriggerBuilder
+					.newTrigger()
+					.startAt(DateBuilder.tomorrowAt(hour, minute, 00))
+					.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInHours(interval).repeatForever())
+					.build();
 
 			SchedulerFactory schFactory = new StdSchedulerFactory();
 			Scheduler sch = schFactory.getScheduler();
