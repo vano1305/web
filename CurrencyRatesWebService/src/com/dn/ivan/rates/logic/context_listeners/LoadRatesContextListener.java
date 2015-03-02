@@ -21,13 +21,14 @@ public class LoadRatesContextListener implements ServletContextListener {
 		
 		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob1", 8, 0, 24);
 		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob2", 12, 0, 24);
-		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob3", 16, 0, 24);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob3", 14, 0, 24);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob4", 16, 0, 24);
 		
-		ManageLogic.createDailyJob(SaveBlackMarketRates2DBJob.class, "BlackMarketJob", 6, 0, 4);
+		ManageLogic.createDailyJob(SaveBlackMarketRates2DBJob.class, "BlackMarketJob", 6, 0, 3);
 		
 		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob1", 8, 45, 24);
 		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob2", 11, 0, 24);
 		
-		ManageLogic.createDailyJob(SaveNbuHistory2DBJob.class, "NbuHistory", 12, 30, 24);
+		ManageLogic.createDailyJob(SaveNbuHistory2DBJob.class, "NbuHistory", 12, 45, 24);
 	}
 }
