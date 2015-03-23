@@ -12,7 +12,7 @@ import com.dn.ivan.rates.logic.SaveNbuHistory2DBJob;
 public class LoadRatesContextListener implements ServletContextListener {
 
 	@Override
-	public void contextDestroyed(ServletContextEvent arg0) {		
+	public void contextDestroyed(ServletContextEvent arg0) {
 				
 	}
 
@@ -24,7 +24,7 @@ public class LoadRatesContextListener implements ServletContextListener {
 		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob3", 14, 0, 24);
 		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob4", 16, 0, 24);
 		
-		ManageLogic.createDailyJob(SaveBlackMarketRates2DBJob.class, "BlackMarketJob", 6, 0, 3);
+		ManageLogic.createDailyJob(SaveBlackMarketRates2DBJob.class, "BlackMarketJob", 6, 0, 2);
 		
 		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob1", 8, 45, 24);
 		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob2", 11, 0, 24);

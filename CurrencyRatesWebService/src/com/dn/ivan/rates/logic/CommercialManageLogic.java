@@ -13,6 +13,23 @@ import com.dn.ivan.rates.Const;
 
 public class CommercialManageLogic {
 	
+	public static void loadCommercialRates() {
+		
+		ArrayList<String> currencyCode = new ArrayList<String>(Arrays.asList("USD", "EUR", "RUB"));
+		
+		for(int i = 0; i < currencyCode.size(); i++) {
+			
+			try {
+				getCommercialRatesFromWEB(currencyCode.get(i), true);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static CommercialRatesLst getCommercialRates() throws Exception {
 		
 		CommercialRatesLst response = new CommercialRatesLst();
@@ -157,7 +174,7 @@ public class CommercialManageLogic {
 					
 					if (previousCommercialRates.commercialRatesList.get(a).sourceUrl.equalsIgnoreCase(item.sourceUrl)) {
 						
-						previous_date = previousCommercialRates.commercialRatesList.get(a).date;
+						previous_date = previousCommercialRates.commercialRatesList.get(a).date.substring(0, previousCommercialRates.commercialRatesList.get(a).date.indexOf(" "));
 						
 						previous_buy = "".equalsIgnoreCase(previousCommercialRates.commercialRatesList.get(a).rateBuy)? 0: Double.valueOf(previousCommercialRates.commercialRatesList.get(a).rateBuy);
 						previous_sale = "".equalsIgnoreCase(previousCommercialRates.commercialRatesList.get(a).rateSale)? 0: Double.valueOf(previousCommercialRates.commercialRatesList.get(a).rateSale);

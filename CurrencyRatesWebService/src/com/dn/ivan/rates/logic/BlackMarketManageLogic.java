@@ -13,6 +13,31 @@ import com.dn.ivan.rates.Const;
 
 public class BlackMarketManageLogic {
 	
+	public static void loadBlackMarketRates() {
+		
+		ArrayList<String> cityCode = new ArrayList<String>(Arrays.asList("dnepropetrovsk", "kiev", "lvov", "odessa", "harkov"));
+		ArrayList<String> currencyCode = new ArrayList<String>(Arrays.asList("usd", "eur", "rub"));
+		ArrayList<String> opCode = new ArrayList<String>(Arrays.asList("1", "2"));
+		
+		for(int i = 0; i < cityCode.size(); i++) {
+			
+			for(int a = 0; a < currencyCode.size(); a++) {
+				
+				for(int b = 0; b < opCode.size(); b++) {
+					
+					try {
+						getBlackMarketRatesFromWEB(cityCode.get(i), currencyCode.get(a), opCode.get(b), true);
+					}
+					catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	
+	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public static BlackMarketRatesLst getBlackMarketRates(String cityCode) throws Exception {
 		
 		BlackMarketRatesLst response = new BlackMarketRatesLst();
@@ -154,7 +179,7 @@ public class BlackMarketManageLogic {
 							&& previousBlackMarketRates.blackMarketRatesList.get(a).currencyCode.equalsIgnoreCase(item.currencyCode) 
 							&& previousBlackMarketRates.blackMarketRatesList.get(a).opCode.equalsIgnoreCase(item.opCode)) {
 						
-						previous_date = previousBlackMarketRates.blackMarketRatesList.get(a).date;
+						previous_date = previousBlackMarketRates.blackMarketRatesList.get(a).date.substring(0, previousBlackMarketRates.blackMarketRatesList.get(a).date.indexOf(" "));
 						
 						previous_rate = "".equalsIgnoreCase(previousBlackMarketRates.blackMarketRatesList.get(a).rate)? 0: Double.valueOf(previousBlackMarketRates.blackMarketRatesList.get(a).rate);						
 						previous_rate_delta = "".equalsIgnoreCase(previousBlackMarketRates.blackMarketRatesList.get(a).rate_delta)? 0: Double.valueOf(previousBlackMarketRates.blackMarketRatesList.get(a).rate_delta);

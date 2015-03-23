@@ -100,4 +100,24 @@ public class RatesService {
 			return Response.ok(new NbuHistoryItem()).build();
 		}
 	}
+	
+	@GET
+	@Path("/reload_all")
+	public Response reloadAllData() {
+		
+		try {
+			
+			FuelManageLogic.loadFuelRates();
+			CommercialManageLogic.loadCommercialRates();
+			BlackMarketManageLogic.loadBlackMarketRates();
+			
+			NbuHistoryManageLogic.getNbuRatesForHistory(1);
+			
+			return Response.ok().build();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return Response.ok(new NbuHistoryItem()).build();
+		}
+	}
 }

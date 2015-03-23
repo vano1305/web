@@ -75,6 +75,8 @@ public class BlackMarketSAXParser {
 	
 	class XMLParser extends DefaultHandler {
 		
+		boolean isValid = false;
+		
 		String thisElement = "";
 		
 		private int tr_count = 0;
@@ -87,6 +89,13 @@ public class BlackMarketSAXParser {
 			thisElement = qName;
 			
 			if ("tr".equalsIgnoreCase(qName)) {
+				
+				if (attributes.getValue("class") != null && "invalid".equalsIgnoreCase(attributes.getValue("class"))) {
+					isValid = false;
+				}
+				else {
+					isValid = true;
+				}
 				
 				rate = new BlackMarketRateItem();
 				
@@ -115,7 +124,7 @@ public class BlackMarketSAXParser {
 			if ("tr".equalsIgnoreCase(qName)) {
 				
 				td_count = 0;
-				if (tr_count > 1) {
+				if (tr_count > 1 && isValid) {
 					rates.add(rate);
 				}
 				rate = null;
