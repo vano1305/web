@@ -8,7 +8,7 @@ public class SaveNbuHistory2DBJob implements Job {
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {		
 		try {
-			NbuHistoryManageLogic.getNbuRatesForHistory(1);
+			NbuManageLogic.getNbuRatesForHistory(1);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

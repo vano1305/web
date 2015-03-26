@@ -5,7 +5,7 @@ public class NbuRateItem {
 	public String date = "";
 	public String code = "";
 	public String char3 = "";
-	public String size = "";
+	public String size = "1";
 	public String name = "";
 	public String rate = "";	
 	public String change = "";
