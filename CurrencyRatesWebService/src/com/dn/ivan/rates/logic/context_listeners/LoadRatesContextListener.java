@@ -19,16 +19,16 @@ public class LoadRatesContextListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		
-		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob1", 8, 0, 24);
-		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob2", 12, 0, 24);
-		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob3", 14, 0, 24);
-		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob4", 16, 0, 24);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob1", 10, 00, 24);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob2", 14, 00, 24);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob3", 16, 00, 24);
+		ManageLogic.createDailyJob(SaveFuelRates2DBJob.class, "FuelJob4", 18, 00, 24);
 		
-		ManageLogic.createDailyJob(SaveBlackMarketRates2DBJob.class, "BlackMarketJob", 6, 0, 2);
+		ManageLogic.createDailyJob(SaveBlackMarketRates2DBJob.class, "BlackMarketJob", 8, 00, 2);
 		
-		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob1", 8, 45, 24);
-		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob2", 11, 0, 24);
+		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob1", 10, 45, 24);
+		ManageLogic.createDailyJob(SaveCommercialRates2DBJob.class, "CommercialJob2", 13, 00, 24);
 		
-		ManageLogic.createDailyJob(SaveNbuHistory2DBJob.class, "NbuHistory", 12, 45, 24);
+		ManageLogic.createDailyJob(SaveNbuHistory2DBJob.class, "NbuHistory", 15, 00, 24);
 	}
 }
